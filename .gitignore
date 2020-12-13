@@ -16,3 +16,12 @@ compile
 NEWS
 AUTHORS
 README
+autohdr.h
+hyperrogue
+hyperrogue-hyper.o
+hyperrogue-savepng.o
+langen
+langen-langen.o
+language-data.cpp
+makeh
+makeh.o
