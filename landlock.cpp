@@ -189,6 +189,11 @@ EX bool incompatible1(eLand l1, eLand l2) {
   if(l1 == laPrairie && l2 == laCrossroads3) return true;
   if(l1 == laWet && l2 == laDesert) return true;
   if(l1 == laFrog && l2 == laMotion) return true;
+  if(l1 == laMotion && l2 == laMinefield) return true;
+  if(l1 == laMotion && l2 == laAlchemist) return true;
+  if(l1 == laMotion && l2 == laOcean) return true;
+  if(l1 == laMotion && l2 == laPalace) return true;
+  if(l1 == laMotion && l2 == laDeadCaves) return true;
   if(isElemental(l1) && isElemental(l2)) return true;
   return false;
   }
