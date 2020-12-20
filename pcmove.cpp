@@ -767,6 +767,7 @@ bool pcmove::after_escape() {
   attackable = 
     c2->wall == waBigTree ||
     c2->wall == waSmallTree ||
+    c2->wall == waVitrified ||
     (c2->wall == waShrub && items[itOrbSlaying]) ||
     c2->wall == waMirrorWall;
   if(attackable && markOrb(itOrbAether) && c2->wall != waMirrorWall)
@@ -784,6 +785,15 @@ bool pcmove::after_escape() {
     if(c2->wall == waSmallTree) {
       drawParticles(c2, winf[c2->wall].color, 4);
       addMessage(XLAT("You chop down the tree."));
+      playSound(c2, "hit-axe" + pick123());
+      changes.ccell(c2);
+      c2->wall = waNone;
+      spread_plague(cwt.at, c2, mi.d, moPlayer);
+      return swing();
+      }
+    if(c2->wall == waVitrified) {
+      drawParticles(c2, winf[c2->wall].color, 4);
+      addMessage(XLAT("You smash  the statue."));
       playSound(c2, "hit-axe" + pick123());
       changes.ccell(c2);
       c2->wall = waNone;
@@ -1327,7 +1337,7 @@ EX void produceGhost(cell *c, eMonster victim, eMonster who) {
 EX bool swordAttack(cell *mt, eMonster who, cell *c, int bb) {
   eMonster m = c->monst;
   if(c->wall == waCavewall) markOrb(bb ? itOrbSword2: itOrbSword);
-  if(among(c->wall, waSmallTree, waBigTree, waRose, waCTree, waVinePlant, waBigBush, waSmallBush, waSolidBranch, waWeakBranch, waShrub)
+  if(among(c->wall, waSmallTree, waBigTree, waVitrified, waRose, waCTree, waVinePlant, waBigBush, waSmallBush, waSolidBranch, waWeakBranch, waShrub)
     || thruVine(mt, c)) {
     changes.ccell(c);
     playSound(NULL, "hit-axe"+pick123());
@@ -1413,6 +1423,13 @@ EX void sideAttackAt(cell *mf, int dir, cell *mt, eMonster who, eItem orb, cell 
       }
     }
   else if(mt->wall == waSmallTree) {
+    changes.ccell(mt);
+    plague_particles();
+    markOrb(orb);
+    mt->wall = waNone;
+    spread_plague(mf, mt, dir, who);
+    }
+  else if(mt->wall == waVitrified) {
     changes.ccell(mt);
     plague_particles();
     markOrb(orb);

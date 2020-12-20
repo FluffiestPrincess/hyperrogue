@@ -199,6 +199,7 @@ EX void flashCell(cell *c, eMonster killer, flagtype flags) {
   if(c->wall == waDeadTroll) c->wall = waCavefloor;
   if(c->wall == waDeadTroll2) c->wall = waNone;
   if(c->wall == waPetrified) c->wall = waNone;
+  if(c->wall == waVitrified) c->wall = waNone;
   if(c->wall == waDeadfloor2)  c->wall = waDeadfloor;
   if(c->wall == waGargoyleFloor)  c->wall = waChasm;
   if(c->wall == waGargoyleBridge)  placeWater(c, c);
@@ -404,6 +405,7 @@ EX void castLightningBolt(cellwalker lig) {
     if(c->wall == waDeadTroll) c->wall = waCavefloor, brk = true;
     if(c->wall == waDeadTroll2)c->wall = waNone, brk = true;
     if(c->wall == waPetrified) c->wall = waNone, brk = true;
+    if(c->wall == waVitrified) c->wall = waNone, brk = true;
     if(c->wall == waDeadfloor2)c->wall = waDeadfloor;
     if(c->wall == waRubble)    c->wall = waNone;
     if(c->wall == waDeadwall)  c->wall = waDeadfloor2, brk = true;
@@ -1150,7 +1152,7 @@ EX int check_vault(cell *cf, cell *ct, flagtype flags, cell*& jumpthru) {
     }
   jumpthru = c2;
   if(!c2) return 0;
-  bool cutwall = among(c2->wall, waShrub, waExplosiveBarrel, waSmallTree, waBigTree);
+  bool cutwall = among(c2->wall, waShrub, waExplosiveBarrel, waSmallTree, waBigTree, waVitrified);
   if(!c2->monst && !cutwall) return 1;
   bool for_monster = !(flags & P_ISPLAYER);
   if(for_monster && c2->monst && frog_power(c2->monst) && !items[itOrbDiscord]) return 1; 
@@ -1280,6 +1282,10 @@ EX eItem targetRangedOrb(cell *c, orbAction a) {
         }
       if(jumpthru->wall == waSmallTree) {
         addMessage(XLAT("You chop down the tree."));
+        jumpthru->wall = waNone;
+        }
+      if(jumpthru->wall == waVitrified) {
+        addMessage(XLAT("You smash the statue."));
         jumpthru->wall = waNone;
         }
       if(jumpthru->wall == waBigTree) {

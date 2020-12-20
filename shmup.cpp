@@ -1679,6 +1679,10 @@ void moveBullet(monster *m, int delta) {
         addMessage(XLAT("You chop down the tree."));
         c2->wall = waNone;
         }
+      else if(c2->wall == waVitrified) {
+        addMessage(XLAT("You smash the statue."));
+        c2->wall = waNone;
+        }
       else if(isActivable(c2)) 
         activateActiv(c2, true);
       else if(c2->wall == waExplosiveBarrel)

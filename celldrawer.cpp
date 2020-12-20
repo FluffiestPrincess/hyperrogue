@@ -494,11 +494,11 @@ void celldrawer::setcolors() {
       fcol = wcol;
       break;
     
-    case waDeadTroll2: case waPetrifiedBridge: case waPetrified: {
+    case waDeadTroll2: case waPetrifiedBridge: case waPetrified: case waVitrified: {
       eMonster m = eMonster((unsigned char)c->wparam);
-      if(c->wall == waPetrified || c->wall == waPetrifiedBridge) 
+      if(c->wall == waPetrified || c->wall == waVitrified || c->wall == waPetrifiedBridge) 
         wcol = gradient(wcol, minf[m].color, 0, .2, 1);
-      if(c->wall == waPetrified || isTroll(m)) if(!(m == moForestTroll && c->land == laOvergrown))
+      if(c->wall == waPetrified || c->wall == waVitrified || isTroll(m)) if(!(m == moForestTroll && c->land == laOvergrown))
         wcol = gradient(wcol, minf[m].color, 0, .4, 1);
       break;
       }

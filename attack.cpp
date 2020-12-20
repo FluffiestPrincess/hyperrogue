@@ -195,7 +195,7 @@ EX bool petrify(cell *c, eWall walltype, eMonster m) {
     walltype = waGargoyleFloor;
   else if(walltype == waGargoyle && isWatery(c)) 
     walltype = waGargoyleBridge;
-  else if(walltype == waPetrified && isWatery(c))
+  else if((walltype == waPetrified || walltype == waVitrified) && isWatery(c))
     walltype = waPetrifiedBridge;
   else if((c->wall == waTempBridge || c->wall == waTempBridgeBlocked) && c->land == laWhirlpool) {
     c->wall = waTempBridgeBlocked;
@@ -217,7 +217,7 @@ EX bool petrify(cell *c, eWall walltype, eMonster m) {
 EX void killIvy(cell *c, eMonster who) {
   if(c->monst == moIvyDead) return;
   changes.ccell(c);
-  if(checkOrb(who, itOrbStone)) petrify(c, waPetrified, c->monst);
+  if(checkOrb(who, itOrbStone)) petrify(c, waVitrified, c->monst);
   c->monst = moIvyDead; // NEWYEARFIX
   for(int i=0; i<c->type; i++) if(c->move(i))
     if(isIvy(c->move(i)) && c->move(i)->mondir == c->c.spin(i))
@@ -277,7 +277,7 @@ EX void prespill(cell* c, eWall t, int rad, cell *from) {
     c->wall == waVinePlant || isFire(c) || c->wall == waBonfireOff || c->wall == waVineHalfA || c->wall == waVineHalfB ||
     c->wall == waCamelotMoat || c->wall == waSea || c->wall == waCTree ||
     c->wall == waRubble || c->wall == waGargoyleFloor || c->wall == waGargoyle ||
-    c->wall == waRose || c->wall == waPetrified || c->wall == waPetrifiedBridge || c->wall == waRuinWall ||
+    c->wall == waRose || c->wall == waPetrified || c->wall == waVitrified || c->wall == waPetrifiedBridge || c->wall == waRuinWall ||
     among(c->wall, waDeepWater, waShallow))
       t = waTemporary;
 
@@ -530,7 +530,7 @@ EX void killMonster(cell *c, eMonster who, flagtype deathflags IS(0)) {
         cell *c2 = c->move(i);
         if(c2->wall == waPlatform || c2->wall == waGargoyle || c2->wall == waBarrier ||
           c2->wall == waDeadTroll || c2->wall == waDeadTroll2 || c2->wall == waTrunk ||
-          c2->wall == waPetrified || isAlchAny(c2->wall))
+          c2->wall == waPetrified || c2->wall == waVitrified || isAlchAny(c2->wall))
           connected = true;
         }
       }
@@ -689,16 +689,16 @@ EX void killMonster(cell *c, eMonster who, flagtype deathflags IS(0)) {
     if(o) items[o] += 5;
     }
   if(checkOrb(who, itOrbStone))
-    petrify(c, waPetrified, m), pcount = 0;
+    petrify(c, waVitrified, m), pcount = 0;
   if(m == moFireFairy) {
     drawFireParticles(c, 16); pcount = 0;
     playSound(c, "die-fairy");
     playSound(c, "fire");
     makeflame(c, 50, false);
     }
-  if(c->monst == moMetalBeast2 && !c->item && who == moLightningBolt && c->wall != waPetrified && c->wall != waChasm)
+  if(c->monst == moMetalBeast2 && !c->item && who == moLightningBolt && c->wall != waPetrified && c->wall != waVitrified && c->wall != waChasm)
     c->item = itFulgurite; // this is actually redundant in many cases
-  if(m == moPyroCultist && c->item == itNone && c->wall != waChasm && c->wall != waPetrified) {
+  if(m == moPyroCultist && c->item == itNone && c->wall != waChasm && c->wall != waPetrified && c->wall != waVitrified) {
     // a reward for killing him before he shoots!
     c->item = itOrbDragon;
     }

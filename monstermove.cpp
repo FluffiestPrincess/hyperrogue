@@ -166,7 +166,7 @@ EX void moveMonster(const movei& mi) {
     cell *cm = common_neighbor(cf, ct);
     changes.ccell(cm);
     if(cm->wall == waShrub) cm->wall = waNone;
-    if(cm->wall == waSmallTree) cm->wall = waNone;
+    if(cm->wall == waSmallTree || cm->wall == waVitrified) cm->wall = waNone;
     if(cm->wall == waBigTree) cm->wall = waSmallTree;
     if(cm->wall == waExplosiveBarrel) explodeBarrel(cm);
     if(cm->monst)
@@ -2092,7 +2092,7 @@ EX bool nogoSlow(cell *to, cell *from) {
   }
 
 EX void beastcrash(cell *c, cell *beast) {
-  if(c->wall == waPetrified || c->wall == waDeadTroll || c->wall == waDeadTroll2 ||
+  if(c->wall == waPetrified || c->wall == waVitrified || c->wall == waDeadTroll || c->wall == waDeadTroll2 ||
     c->wall == waGargoyle) {
     addMessage(XLAT("%The1 crashes into %the2!", beast->monst, c->wall));
     c->wall = waNone;

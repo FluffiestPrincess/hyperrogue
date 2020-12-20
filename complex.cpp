@@ -1452,7 +1452,7 @@ EX namespace mirror {
           }
         if(c2->wall == waBigTree)
           c2->wall = waSmallTree;
-        else if(c2->wall == waSmallTree)
+        else if(c2->wall == waSmallTree || c2->wall == waVitrified)
           c2->wall = waNone;
         if(fwd) {
           if(noMirrorOn(c2) || !passable_for(moMimic, c2, c, P_MONSTER | P_MIRROR | P_MIRRORWALL)) {
@@ -2351,7 +2351,7 @@ EX void livecaves() {
         else if(w == waStone) ;
         else if(w == waDeadTroll) hv -= 5;
         else if(w == waDeadTroll2) hv -= 3;
-        else if(w == waPetrified || w == waPetrifiedBridge) hv -= 2;
+        else if(w == waPetrified || w == waVitrified || w == waPetrifiedBridge) hv -= 2;
         else if(w == waVinePlant) hv--;
         else if(chaosmode && c2->land != laCaves && c2->land != laEmerald) ;
         else if(c2->land == laTrollheim) ; // trollheim floor does not count
@@ -2401,7 +2401,7 @@ EX void livecaves() {
           ;
         else if(c2->wall == waDeadTroll || c2->wall == waDeadTroll2 || c2->wall == waThumperOn || isFire(c2) || snakelevel(c2))
           hv -= 10;
-        else if(c2->wall == waPetrified || c2->wall == waPetrifiedBridge)
+        else if(c2->wall == waPetrified || c2->wall == waVitrified || c2->wall == waPetrifiedBridge)
           hv -= 10;
         if(c2->wall == waBigStatue)
           hv -= 10;
@@ -2673,7 +2673,7 @@ EX namespace dragon {
       if(checkOrb(who, itOrbUndeath)) 
         c->monst = moFriendlyGhost;
       if(checkOrb(who, itOrbStone)) 
-        c->wparam = m, c->wall = waPetrified;
+        c->wparam = m, c->wall = waVitrified;
       else if(c->wall == waFire) {
         if(delay) delay = false;
         else {
@@ -2947,7 +2947,7 @@ EX namespace kraken {
           if(isWatery(c1))
             c1->wall = waNone;
           else
-            c1->wall = waPetrified, c1->wparam = moKrakenT;
+            c1->wall = waVitrified, c1->wparam = moKrakenT;
           }
         }
     }

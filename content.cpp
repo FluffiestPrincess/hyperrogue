@@ -764,10 +764,13 @@ ITEM( '!', 0xFFD700, "Golden Egg", itTrollEgg, IC_TREASURE, ZERO, RESERVED, osNo
     )
 ITEM( '!', 0xFF0000, "Warning", itWarning, IC_NAI, ZERO, RESERVED, osNone, warningdesc
     )
-ITEM( 'o', 0x808080, "Orb of the Stone", itOrbStone, IC_ORB, ZERO | IF_EMPATHY, RESERVED, osNone, 
-    "Trolls turn into stone walls when they die. When you have this Orb, "
-    "this happens to every monster you defeat. Statues created from this Orb "
-    "have slightly different properties than Trolls who petrify naturally."
+ITEM( 'o', 0x808080, "Orb of Vitrification", itOrbStone, IC_ORB, ZERO | IF_EMPATHY, RESERVED, osNone, 
+    "An orb holding a cruel power. Any enemy you slay while holding it will "
+    "be transformed into a statue of glass, to be shattered at will or left "
+    "as a monument to your skill in battle."
+    //"Trolls turn into stone walls when they die. When you have this Orb, "
+    //"this happens to every monster you defeat. Statues created from this Orb "
+    //"have slightly different properties than Trolls who petrify naturally."
     )
 ITEM( 'o', 0xC08000, "Orb of Nature", itOrbNature, IC_ORB, ZERO | IF_RANGED | IF_SHMUPLIFE, RESERVED, osRanged, naturedesc )
 ITEM( '%', 0x800080, "Treat", itTreat, IC_TREASURE, ZERO | IF_FIREPROOF, RESERVED, osNone, halloweendesc )
@@ -1628,6 +1631,9 @@ ITEM( 'o', 0x808080, "Orb of Chaos", itOrbChaos, IC_ORB, ZERO, RESERVED, osUtili
    "Does not work if one of the cells contains a "
    "multi-tile creature or a barrier-like wall."
   )
+// Added by Rosa
+WALL( '#', 0xE0E0E0, "glass statue", waVitrified, WF_WALL | WF_HIGHWALL, RESERVED, 0, sgNone, "A vitrified creature.")
+
   NATIVE(among(m, moRedTroll, moMiner, moTroll, moFireFairy, moMetalBeast, moPalace, moWolf, moIceGolem, moPair) ? 1 : 0)
   #define LST {itDiamond, itFulgurite, itPalace, itSilver}
   REQ(ITEMS_TOTAL(LST, variant_unlock_value()*4/3))

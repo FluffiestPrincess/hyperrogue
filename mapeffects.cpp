@@ -438,7 +438,7 @@ EX void explosion(cell *c, int power, int central) {
     #endif
     if(c2->wall == waRed2 || c2->wall == waRed3)
       c2->wall = waRed1;
-    else if(c2->wall == waDeadTroll || c2->wall == waDeadTroll2 || c2->wall == waPetrified || c2->wall == waGargoyle) {
+    else if(c2->wall == waDeadTroll || c2->wall == waDeadTroll2 || c2->wall == waPetrified || c2->wall == waVitrified || c2->wall == waGargoyle) {
       c2->wall = waNone;
       makeflame(c2, power/2, false);
       }
@@ -932,6 +932,7 @@ EX void explodeAround(cell *c) {
       if(c2->wall == waCavewall || c2->wall == waDeadTroll) c2->wall = waCavefloor;
       if(c2->wall == waDeadTroll2) c2->wall = waNone;
       if(c2->wall == waPetrified) c2->wall = waNone;
+      if(c2->wall == waVitrified) c2->wall = waNone;
       if(c2->wall == waDeadfloor2) c2->wall = waDeadfloor;
       if(c2->wall == waGargoyleFloor) c2->wall = waChasm;
       if(c2->wall == waGargoyleBridge || c2->wall == waPetrifiedBridge) placeWater(c2, c2);
