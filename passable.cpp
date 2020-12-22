@@ -602,6 +602,7 @@ EX map<cell*, int> rosemap;
 
 EX int rosedist(cell *c) {
   if(!(havewhat&HF_ROSE)) return 0;
+  if(c->land != laRose) return 0;
   int&r (rosemap[c]);
   if((r&7) == 7) return 0;
   if(r&3) return (r&3)-1;
