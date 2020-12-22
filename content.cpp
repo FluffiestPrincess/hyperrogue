@@ -528,7 +528,7 @@ ITEM( '*', 0xFFFF00, "Powerstone", itPower, IC_TREASURE, ZERO, RESERVED, osNone,
     "as the Powerstones are kept in crystal cabinets, they are surely valuable."
     )
 ITEM( 'o', 0xFF4000, "Orb of Fire", itOrbFire, IC_ORB, ZERO | IF_FIREPROOF | IF_EMPATHY, RESERVED, osNone,
-    "When you have this Orb, you will leave a trail of fire behind you."
+    "When you have this Orb, you will leave a trail of fire behind you, and can walk safely through fire."
     )
 ITEM( '!', 0xFFFF00, "Holy Grail", itHolyGrail, IC_OTHER, ZERO, RESERVED, osNone, camelothelp )
 ITEM( '?', 0x00FF00, "Grimoire", itGrimoire, IC_TREASURE, ZERO, RESERVED, osNone,

@@ -288,7 +288,7 @@ EX bool survivesFire(eMonster m) {
   return
     isGhostAether(m) || m == moWitchWinter || m == moWitchGhost ||
     m == moBomberbird || m == moTameBomberbird || m == moTameBomberbirdMoved ||
-    checkOrb(m, itOrbWinter) || m == moFireElemental ||
+    checkOrb(m, itOrbWinter) || checkOrb(m, itOrbFire) || m == moFireElemental ||
     isDragon(m) || m == moShadow;
   }
 

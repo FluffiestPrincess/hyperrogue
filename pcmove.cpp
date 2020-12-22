@@ -150,7 +150,7 @@ bool pcmove::checkNeedMove(bool checkonly, bool attacking) {
     if(markOrb2(itOrbAether)) return false;
     if(vmsg()) addMessage(XLAT("The gate is closing right on you! RUN!"));
     }
-  else if(isFire(cwt.at) && !markOrb(itOrbWinter) && !markOrb2(itOrbShield)) {
+  else if(isFire(cwt.at) && !markOrb(itOrbWinter) && !markOrb(itOrbFire) && !markOrb2(itOrbShield)) {
     if(markOrb2(itOrbAether)) return false;
     if(vmsg()) addMessage(XLAT("This spot will be burning soon! RUN!"));
     }

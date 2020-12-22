@@ -1247,7 +1247,7 @@ void movePlayer(monster *m, int delta) {
     if(isWatery(m->base) && !m->inBoat && !markOrb(itOrbFish))
       m->dead = true;
 
-    if(isFireOrMagma(m->base) && !markOrb(itOrbWinter))
+    if(isFireOrMagma(m->base) && !markOrb(itOrbWinter) && !markOrb(itOrbFire))
       m->dead = true;
     }
 
