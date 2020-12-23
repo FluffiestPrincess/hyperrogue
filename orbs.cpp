@@ -10,6 +10,7 @@ namespace hr {
 
 EX bool orbused[ittypes], lastorbused[ittypes];
 
+// Checks if the orb is available to the player, and marks it as used if so
 EX bool markOrb(eItem it) {
   if(!items[it]) return false;
   orbused[it] = true;
