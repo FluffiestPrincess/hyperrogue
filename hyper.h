@@ -197,7 +197,7 @@ void addMessage(string s, char spamtype = 0);
 
 #define VALENCE current_valence()
 
-#define NUMWITCH 7
+#define NUMWITCH 6
 
 // achievements
 

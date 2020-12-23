@@ -724,7 +724,7 @@ EX void giantLandSwitch(cell *c, int d, cell *from) {
           if(!c3) continue;
           if(c3->land != laPower && c3->land != laBarrier)
           if(c2->wall != waFire && c2->wall != waGlass) {
-            if(isFire(c)) c->monst = moWitchWinter;
+            if(isFire(c)) c->monst = moWitchGhost;
             else if(c->wall == waGlass) c->monst = moWitchGhost;
             else c->monst = moEvilGolem;
             }
@@ -732,9 +732,9 @@ EX void giantLandSwitch(cell *c, int d, cell *from) {
         }
       ONEMPTY {
         if(hrand(5000+50*items[itPower]) < 1200) {
-          eItem powerorbs[6] = {
-            itOrbFlash, itOrbSpeed, itOrbFire, itOrbWinter, itOrbAether, itOrbLife};
-          c->item = powerorbs[hrand(6)];
+          eItem powerorbs[5] = {
+            itOrbFlash, itOrbSpeed, itOrbFire, itOrbAether, itOrbLife};
+          c->item = powerorbs[hrand(5)];
           }
         else if(hrand(5000) < 10 && mirror::build(c)) ;
         else if(hrand_monster(1000) < 10 + (items[itPower] ? 10:0) + (items[itPower] + yendor::hardness()))
