@@ -337,7 +337,7 @@ EX bool ghostmove(eMonster m, cell* to, cell* from, flagtype extra) {
   if(to->monst && !(to->monst == moTentacletail && isGhost(m) && m != moFriendlyGhost)
     && !(to->monst == moTortoise && isGhost(m) && m != moFriendlyGhost) && !(extra & P_MONSTER))
     return false;
-  if((m == moWitchGhost || m == moWitchWinter) && to->land != laPower)
+  if((m == moWitchGhost || m == moWitchWinter || m == moWitchFire) && to->land != laPower)
     return false;
   if(isGhost(m))
     for(int i=0; i<to->type; i++) if(to->move(i)) {
@@ -348,7 +348,7 @@ EX bool ghostmove(eMonster m, cell* to, cell* from, flagtype extra) {
       }
   if(isGhost(m) || m == moWitchGhost) return true;
   if(m == moGreaterShark) return isWatery(to);
-  if(m == moWitchWinter) 
+  if(m == moWitchWinter || m == moWitchFire) 
     return passable(to, from, P_WINTER | P_ONPLAYER);
   return false;
   }

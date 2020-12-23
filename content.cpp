@@ -197,17 +197,17 @@ MONSTER( 'W', 0xFFFFFF, "Flash Witch", moWitchFlash, CF_FACE_UP | CF_WITCH | CF_
     "Luckily, she never uses the spell if it would kill her friends. "
     "She could destroy an Evil Golem, though."
     )
-MONSTER( 'W', 0xFF8000, "Fire Witch", moWitchFire, CF_FACE_UP | CF_WITCH | CF_POWER, RESERVED, moYeti, 
-    "A Witch with a Fire spell. She will leave a trail of fire behind her."
-    )
-MONSTER( 'W', 0x8080FF, "Winter Witch", moWitchWinter, CF_FACE_UP | CF_WITCH | CF_IGNORE_SMELL | CF_GHOSTMOVER | CF_POWER, RESERVED, moWitchWinter, 
-    "A Witch with a Winter spell. She is able to move through fire."
+MONSTER( 'W', 0xFF8000, "Fire Witch", moWitchFire, CF_FACE_UP | CF_WITCH | CF_IGNORE_SMELL | CF_GHOSTMOVER | CF_POWER, RESERVED, moWitchWinter, 
+    "A Witch with a Fire spell. She will leave a trail of fire behind her and can move through fire unimpeded."
     )
 MONSTER( 'W', 0x808080, "Aether Witch", moWitchGhost, CF_FACE_UP | CF_NOBLOW | CF_WITCH | CF_IGNORE_SMELL | CF_GHOSTMOVER | CF_POWER, RESERVED, moWitchGhost, 
     "A Witch with an Aether spell. She is able to move through fire and walls."
     )
 MONSTER( '@', 0x905050, "Evil Golem", moEvilGolem, CF_FACE_UP | CF_NONLIVING | CF_POWER, RESERVED, moYeti,
     "Somebody has summoned these evil constructs with a magical process."
+    )
+MONSTER( 'W', 0x8080FF, "Winter Witch", moWitchWinter, CF_FACE_UP | CF_WITCH | CF_IGNORE_SMELL | CF_GHOSTMOVER | CF_POWER, RESERVED, moWitchWinter, 
+    "A Witch with a Winter spell. She is able to move through fire."
     )
 MONSTER( '@', 0x8080FF, "Knight", moKnight, CF_FACE_UP | CF_NOGHOST | CF_GOK | CF_FRIENDLY | CF_FACING, RESERVED, moNone, camelothelp )
 MONSTER( 'P', 0xD10000, "Cult Leader", moCultistLeader, CF_FACE_UP | CF_LEADER, RESERVED, moPirate, 
