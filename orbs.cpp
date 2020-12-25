@@ -163,6 +163,7 @@ EX void reduceOrbPowers() {
   reduceOrbPower(itOrbImpact, 120);
   reduceOrbPower(itOrbChaos, 120);
   reduceOrbPower(itOrbPlague, 120);
+//  reduceOrbPower(itOrbDisintegration, 333);
 
   reduceOrbPower(itOrbSide1, 120);
   reduceOrbPower(itOrbSide2, 120);
@@ -920,6 +921,45 @@ void tempWallAt(cell *dest) {
   checkmoveO();
   }
 
+bool isDisintegrateable(cell *dest) {
+  if(among(dest->wall, waBarrier, waWarpGate, waMirrorWall, waMirror, waCloud, waRoundTable))
+    return false;
+
+  if(isWall(dest->wall)) return true;
+  if(dest->wall == waBoat) return true;
+  if(realred(dest->wall)) return true; // Red Rock Valley walls
+  if(dest->wall == waVineHalfA || dest->wall == waVineHalfB) return true;
+  if(dest->monst == passive_switch) return true; // Passive Jelly Kingdom jellies
+  if(dest->land == laBrownian && dest->wall == waNone) return true;
+
+  return false;
+  }
+
+void disintegrate(cell *dest) {
+  // Partly duplicates brownian::dissolve
+  if(dest->monst == passive_switch) attackMonster(dest, AF_PSI, moPlayer);
+  else if(dest->land == laBrownian) brownian::dissolve_brownian(dest, 1);
+  else if(dest->wall == waRed2) dest->wall = waRed1;
+  else if(dest->wall == waRed3) dest->wall = waRed2;
+  else if(dest->wall == waBoat) dest->wall = waSea;
+  else if(cellHalfvine(dest)) destroyHalfvine(dest, waNone, 4);
+  else if(dest->item == itBarrow) {
+    addMessage(XLAT("If you used the Orb of Disintegration, you would destroy %the1!", dest->item));
+    return;
+  }
+  else if(dest->wall == waRose) {
+    addMessage(XLAT("Destroying %the1 drains the powers of your orb!", dest->wall));
+    dest->wall = waNone;
+    drainOrb(itOrbDisintegration);
+  }
+  else dest->wall = waNone;
+  destroyTrapsAround(dest);
+  useupOrb(itOrbDisintegration, 20);
+  createNoise(2);
+  bfs();
+  checkmoveO();
+  }
+
 void psi_attack(cell *dest) {
   playSound(dest, "other-mind");
   if(isNonliving(dest->monst))
@@ -1406,6 +1446,12 @@ EX eItem targetRangedOrb(cell *c, orbAction a) {
     return itOrbDragon;
     }
   
+  // (7) disintegration
+  if(items[itOrbDisintegration] && isDisintegrateable(c)) {
+    if(!isCheck(a)) disintegrate(c), apply_impact(c);
+    return itOrbDisintegration;
+    }
+
   if(isWeakCheck(a)) return itNone;
   
   if(nowhereToBlow) {
@@ -1521,6 +1567,7 @@ EX int orbcharges(eItem it) {
       return 60;
     case itOrbWater:
     case itOrbMatter:
+    case itOrbDisintegration:
     case itOrbHorns:
     case itOrbBull:
     case itOrbShell:

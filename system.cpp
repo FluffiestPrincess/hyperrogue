@@ -885,6 +885,7 @@ EX void applyBoxes() {
   applyBoxM(moVaulter);
   applyBoxM(moPike);
   applyBoxM(moRusalka);
+  applyBoxOrb(itOrbDisintegration);
   list_invorb();
 
   applyBoxNum(saved_modecode, "modecode");
