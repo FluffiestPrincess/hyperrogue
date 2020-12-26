@@ -669,6 +669,11 @@ EX void moverefresh(bool turn IS(true)) {
       addMessage(XLAT("%The1 is destroyed!", c->monst));
       fallMonster(c, AF_CRUSH);
       }
+
+    if(c->monst == moSeep && !isWall(c->wall)) {
+      addMessage(XLAT("%The1 is destroyed!", c->monst));
+      fallMonster(c, AF_CRUSH);
+      }
     
     if(c->monst) mayExplodeMine(c, c->monst);
     
