@@ -90,7 +90,7 @@ EX int incline(cell *cfrom, cell *cto) {
 EX bool checkflags(flagtype flags, flagtype x) {
   if(flags & x) return true;
   if(flags & P_ISPLAYER) {
-    if((x & P_WINTER)    && (markOrb(itOrbWinter) || markOrb(itOrbFire))) return true;
+    if((x & P_WINTER)    && (markOrb(itOrbWinter) || markOrb(itOrbFire) || markOrb(itOrbShield))) return true; // I'm suspicious that this is going to have bad effects down the line.
     if((x & P_IGNORE37)  && markOrb(itOrb37)) return true;
     if((x & P_FISH)      && markOrb(itOrbFish)) return true;
     if((x & P_MARKWATER) && markOrb(itOrbWater)) return true;

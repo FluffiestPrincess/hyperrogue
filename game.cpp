@@ -297,7 +297,7 @@ EX bool multiRevival(cell *on, cell *moveto) {
   int fl = 0;
   if(items[itOrbAether]) fl |= P_AETHER;
   if(items[itOrbFish]) fl |= P_FISH;
-  if(items[itOrbWinter] || items[itOrbFire]) fl |= P_WINTER;
+  if(items[itOrbWinter] || items[itOrbFire] || items[itOrbShield]) fl |= P_WINTER; // I think this might be a disaster waiting to happen.
   if(passable(on, moveto, fl)) {
     int id = multi::revive_queue[0];
     for(int i=1; i<isize(multi::revive_queue); i++)
