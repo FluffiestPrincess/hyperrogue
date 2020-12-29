@@ -137,6 +137,8 @@ void celldrawer::setcolors() {
   else if(c->wall == waShallow) 
     fcol = 0x40C0C0;
 
+  else if(c->wall == waStableIce) ; // For the time being I want stable ice to look the same regardless of land
+
   // floor colors for all the lands
   else switch(c->land) {
     case laBurial: case laTrollheim: case laBarrier: case laOceanWall:

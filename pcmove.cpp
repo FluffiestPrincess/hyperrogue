@@ -651,6 +651,11 @@ bool pcmove::actual_move() {
 
   if(isWatery(c2) && !nonAdjacentPlayer(cwt.at,c2) && !c2->monst && cwt.at->wall == waBoat && fmsMove) 
     return boat_move();  
+
+  if(isWatery(c2) && !nonAdjacentPlayer(cwt.at,c2) && !c2->monst && markOrb(itOrbWinter) && fmsMove) {
+    placeIce(c2);
+    return perform_actual_move();
+    }
   
   if(!c2->monst && cwt.at->wall == waBoat && cwt.at->item != itOrbYendor && boatGoesThrough(c2) && markOrb(itOrbWater) && !nonAdjacentPlayer(c2, cwt.at) && fmsMove) {
 

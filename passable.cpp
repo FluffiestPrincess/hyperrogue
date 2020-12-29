@@ -60,6 +60,27 @@ EX void placeWater(cell *c, cell *c2) {
   if(c->item == itBarrow) c->item = itNone;
   }
 
+EX void placeIce(cell *c) {
+  if(c->wall == waBoat && c->land == laCocytus) {
+    addMessage(XLAT("The ice crushes %the1.", c->wall));
+    c->wall = waFrozenLake;
+    }
+  else if(c->land == laCocytus || c->wall == waLake) {
+    // Items are lost under the ice
+    c->item = itNone;
+    c->wall = waFrozenLake;
+    }
+  else if(c->wall == waBoat) {
+    addMessage(XLAT("The ice crushes %the1.", c->wall));
+    c->wall = waStableIce;
+    }
+  else if(isWatery(c)) {
+    // Items are lost under the ice
+    c->item = itNone;
+    c->wall = waStableIce;
+    }
+  }
+
 EX int incline(cell *cfrom, cell *cto) {
   return snakelevel(cto) - snakelevel(cfrom);
   }

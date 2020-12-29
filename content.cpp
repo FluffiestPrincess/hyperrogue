@@ -1635,6 +1635,7 @@ ITEM( 'o', 0x808080, "Orb of Chaos", itOrbChaos, IC_ORB, ZERO, RESERVED, osUtili
 WALL( '#', 0xE0E0E0, "glass statue", waVitrified, WF_WALL | WF_HIGHWALL, RESERVED, 0, sgNone, "A vitrified creature.")
 ITEM( 'o', 0x306090, "Orb of Disintegration", itOrbDisintegration, IC_ORB, ZERO | IF_RANGED, RESERVED, osRanged, 
     "This Orb allows one to disintegrate walls and other barriers.")
+WALL( '.', 0x8080FF, "stable ice", waStableIce, ZERO, RESERVED, 0, sgNone, "Magical ice created by the Orb of Winter. It won't melt.")
 
   NATIVE(among(m, moRedTroll, moMiner, moTroll, moFireFairy, moMetalBeast, moPalace, moWolf, moIceGolem, moPair) ? 1 : 0)
   #define LST {itDiamond, itFulgurite, itPalace, itSilver}
