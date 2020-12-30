@@ -459,7 +459,7 @@ EX namespace inv {
       forCellCM(c2, cwt.at) {
         earthFloor(c2);
         if(c2->wall == waCavewall && !c2->monst)
-          c2->wall = waNone;
+          c2->wall = waNone; // Bypass the hv system
         }        
       }
     

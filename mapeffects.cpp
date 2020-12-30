@@ -155,6 +155,9 @@ EX void useup(cell *c) {
     }
   }
 
+/*Changes the specified cell wall into an appropriate "empty floor" type. 
+Used by the Orb of Earth, for the cells around the player's new position.
+Returns true if it had an effect or false otherwise.*/
 EX bool earthFloor(cell *c) {
   changes.ccell(c);
   if(c->monst) return false;
@@ -201,6 +204,9 @@ EX bool earthFloor(cell *c) {
   return false;
   }
 
+/*Changes the specified cell wall into an appropriate "obstacle" type. 
+Used by the Orb of Earth, for the cell the player steps off.
+Returns true if it had an effect or false otherwise.*/
 EX bool earthWall(cell *c) {
   changes.ccell(c);
   if(c->wall == waDeadfloor || c->wall == waDeadfloor2 || c->wall == waEarthD) {
@@ -955,18 +961,23 @@ EX void explodeAround(cell *c) {
       }
   }
 
+/* Handles the effects of moving with the Orb of Earth equipped
+(except for the Living Cave, which uses the hv system in complex.cpp).
+Returns True if the orb had an effect, false otherwise.*/
 EX bool earthMove(const movei& mi) {
-  auto& from = mi.s;
-  bool b = false;
-  cell *c2 = mi.t;
-  b |= earthWall(from);
-  if(!mi.proper()) return b;
+  auto& origin = mi.s;
+  bool hadEffect = false;
+  cell *destination = mi.t;
+  hadEffect |= earthWall(origin);
+  // For "improper" moves like teleports, skip to the end and don't bother mutating tiles at the destination.
+  if(!mi.proper()) return hadEffect;
   int d = mi.rev_dir_or(0);
-  if(c2) for(int u=2; u<=c2->type-2; u++) {
-    cell *c3 = c2->modmove(d + u);
-    if(c3) b |= earthFloor(c3);
+  if(destination) for(int u=2; u <= destination->type-2; u++) {
+    // For every tile surrounding the destination - except for the origin and the two tiles adjacent to it.
+    cell *surround = destination->modmove(d + u);
+    if(surround) hadEffect |= earthFloor(surround);
     }
-  return b;
+  return hadEffect;
   }
 
 EX bool cellDangerous(cell *c) {

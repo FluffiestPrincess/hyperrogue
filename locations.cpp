@@ -468,7 +468,6 @@ namespace whirlwind { cell *jumpDestination(cell*); }
  *  mostly for 'proper' moves where s->move(d) == t,
  *  but also sometimes for other moves
  */
-
 struct movei {
   cell *s;
   cell *t;
