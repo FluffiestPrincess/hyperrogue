@@ -161,45 +161,49 @@ Returns true if it had an effect or false otherwise.*/
 EX bool earthFloor(cell *c) {
   changes.ccell(c);
   if(c->monst) return false;
-  if(c->wall == waDeadwall) { c->wall = waDeadfloor; return true; }
-  if(c->wall == waDune) { c->wall = waNone; return true; }
-  if(c->wall == waStone && c->land != laTerracotta) { c->wall = waNone; return true; }
-  if(c->wall == waAncientGrave || c->wall == waFreshGrave || c->wall == waRuinWall) {
-    c->wall = waNone;
-    return true;
-    }
-  if(c->land == laWet && among(c->wall, waDeepWater, waShallow, waStone)) {
-    c->wall = waNone;
-    return true;
-    }
-  if((c->wall == waSea || c->wall == waNone) && c->land == laOcean) {
-    c->wall = waCIsland;
-    return true;
-    }
-  if(c->wall == waSea && c->land == laCaribbean) {
-    c->wall = waCIsland;
-    return true;
-    }
-  if(c->wall == waSea && c->land == laWarpSea)
-    c->wall = waNone;
-  if(c->wall == waBoat && c->land == laWarpSea)
-    c->wall = waStrandedBoat;
-  if(c->wall == waMercury) {
-    c->wall = waNone;
-    return true;
-    }
-  if((c->wall == waBarrowDig || c->wall == waBarrowWall) && c->land == laBurial) {
-    c->item = itNone;
-    c->wall = waNone;
-    return true;
-    }
-  if(c->wall == waPlatform && c->land == laMountain) {
-    c->wall = waNone;
-    return true;
-    }
   if(c->wall == waChasm && c->land == laHunting) {
     c->wall = waNone;
     return true;
+    }
+  if(c->wall == waBoat && c->land != laWhirlpool) {
+    c->wall = waStrandedBoat;
+    return true;
+    }
+  switch(c->wall) {
+    case waDeadwall:
+      c->wall = waDeadfloor;
+      return true;
+    case waBarrowDig:
+      if(c->item != itNone) break;
+    case waStone:
+      if(c->land == laTerracotta || c->land == laVariant) destroyTrapsAround(c);
+    case waDune:
+    case waBarrowWall:
+    case waPalace:
+    case waColumn:
+    case waDeadTroll:
+    case waDeadTroll2:
+    case waSulphur:
+    case waSulphurC:
+    case waAncientGrave:
+    case waFreshGrave:
+    case waRuinWall:
+    case waMercury:
+    case waDeepWater:
+    case waShallow:
+      c->wall = waNone;
+      return true;
+    case waSea:
+      if(c->land == laCaribbean || c->land == laOcean || c->land == laKraken) c->wall = waCIsland;
+      else if (c->land == laWhirlpool) break;
+      else if (c->land == laBrownian) {
+        c->landparam = 0;
+        c->wall = waNone;}
+      else c->wall = waNone;
+      return true;
+    case waRed3:
+      c->wall = waRed2;
+      return true;
     }
   return false;
   }
@@ -214,68 +218,95 @@ EX bool earthWall(cell *c) {
     c->wall = waDeadwall;
     return true;
     }
+  if(c->wall == waBigStatue && c->land == laTemple) {
+    addMessage(XLAT("%the1 engulfs %the2 in solid stone!", itOrbDigging, waBigStatue));
+    c->wall = waColumn;
+    c->item = itNone;
+    return true;
+    }
   if(c->land == laWet && among(c->wall, waDeepWater, waShallow, waNone)) {
     c->wall = waStone;
-    return true;
-    }
-  if(c->wall == waNone && c->land == laFrog)
-    c->wall = waStone;
-  if(c->wall == waNone && c->land == laEclectic)
-    c->wall = waDeadwall;
-  if(c->wall == waNone && c->land == laMountain) {
-    c->wall = waPlatform;
-    return true;
-    }
-  if(c->wall == waNone && c->land == laDesert) {
     c->item = itNone;
-    c->wall = waDune;
     return true;
     }
-  if(c->wall == waNone && c->land == laRuins) {
+  /*if(c->wall == waCIsland || c->wall == waCIsland2 || (c->wall == waNone && c->land == laOcean)) {
     c->item = itNone;
-    c->wall = waRuinWall;
-    return true;
-    }
-  if(c->wall == waNone && isElemental(c->land)) {
-    c->item = itNone;
-    c->wall = waStone;
-    return true;
-    }
-  if(c->wall == waNone && c->land == laRedRock) {
-    c->item = itNone;
-    c->wall = waRed3;
-    return true;
-    }
-  if(c->wall == waNone && c->land == laSnakeNest) {
-    c->item = itNone;
-    c->wall = waRed3;
-    return true;
-    }
-  if(c->wall == waNone && c->land == laBurial) {
-    c->item = itNone;
-    c->wall = waBarrowDig;
-    return true;
-    }
-  if(c->wall == waNone && c->land == laHunting) {
-    c->item = itNone;
-    c->wall = waChasm;
-    return true;
-    }
-  if(c->wall == waNone && c->land == laTerracotta) {
-    c->wall = waMercury;
-    return true;
-    }
-  if(c->wall == waArrowTrap && c->land == laTerracotta) {
-    destroyTrapsOn(c);
-    c->wall = waMercury;
-    return true;
-    }
-  if(c->wall == waCIsland || c->wall == waCIsland2 || (c->wall == waNone && c->land == laOcean)) {
-    c->item = itNone;
-    c->wall = waSea;
+    c->wall = waSea; 
     if(c->land == laOcean) c->landparam = 40;
     return true;
+    }*/ // Feels wrong for the Orb of Earth to create water.
+  if(c->wall == waArrowTrap) {
+    destroyTrapsOn(c);
+    c->wall = waNone;
     }
+  if(c->wall == waNone) {
+    if(isElemental(c->land)) {
+      c->item = itNone;
+      c->wall = waStone;
+      return true;
+    }
+    switch(c->land) {
+      case laDesert:
+        c->wall = waDune;
+        c->item = itNone;
+        return true;
+      case laFrog:
+        c->wall = waStone;
+        c->item = itNone;
+        return true;
+      case laEclectic:
+        c->wall = waDeadwall;
+        c->item = itNone;
+        return true;
+      case laMountain:
+      case laIvoryTower:
+        // but not dungeon because that's a deathtrap
+        c->wall = waPlatform;
+        c->item = itNone;
+        return true;
+      case laRuins:
+        c->wall = waRuinWall;
+        c->item = itNone;
+        return true;
+      case laSnakeNest:
+      case laRedRock:
+        c->wall = waRed1;
+        c->item = itNone;
+        return true;
+      case laBurial:
+        c->wall = waBarrowDig;
+        c->item = itNone;
+        return true;
+      case laHunting:
+        c->wall = waChasm;
+        c->item = itNone;
+        return true;
+      case laPalace:
+        c->wall = waPalace;
+        c->item = itNone;
+        return true;
+      case laRlyeh:
+        c->wall = waColumn;
+        c->item = itNone;
+        return true;
+      case laVariant:
+        c->wall = waStone;
+        c->item = itNone;
+        return true;
+      case laTerracotta:
+        c->wall = waMercury;
+        c->item = itNone;
+        return true;
+      case laTrollheim:
+        c->wall = waDeadTroll;
+        c->item = itNone;
+        return true;
+      case laHell:
+        c->wall = waSulphur;
+        c->item = itNone;
+        return true;
+    }
+  }
   return false;
   }
 

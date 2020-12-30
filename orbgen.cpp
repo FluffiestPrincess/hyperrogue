@@ -233,7 +233,7 @@ EX eOrbLandRelation getOLR(eItem it, eLand l) {
   if(it == itOrbSafety && l == laCrossroads5) return olrDangerous;
   if(it == itOrbFire && l == laKraken) return olrUseless;
   if(it == itOrbDragon && l == laKraken) return olrUseless;
-  if(it == itOrbDigging && l == laKraken) return olrUseless;
+//  if(it == itOrbDigging && l == laKraken) return olrUseless;
   if(it == itOrbIllusion && l == laKraken) return olrUseless;
   
   if(it == itOrbSlaying && !among(l, 
@@ -316,10 +316,15 @@ EX eOrbLandRelation getOLR(eItem it, eLand l) {
     return olrNoPrizes;
   
   if(it == itOrbDigging) {
-    if(l == laCaves || l == laOcean || l == laLivefjord || l == laEmerald ||
-      l == laDesert || l == laDeadCaves || l == laRedRock || l == laCaribbean || l == laGraveyard ||
-      l == laMountain || l == laHunting)
+    if(l == laCaves || l == laEmerald || l == laHunting ||
+      l == laOcean || l == laLivefjord || l == laWarpCoast || l == laCaribbean || l == laKraken ||
+      l == laDeadCaves || l == laRedRock || l == laMountain || l == laBurial ||
+      l == laTerracotta || l == laVariant || l == laDesert || l == laRlyeh || l == laTemple ||
+      l == laTrollheim || l == laHell || l ==  laGraveyard || l == laRuins || l == laWet  ||
+      l == laFrog || l == laMountain || l == laIvoryTower || l == laEclectic  )
         return olrPrize25;
+    if(l == laPalace || l == laPrincessQuest)
+        return olrForbidden;
     return olrUseless;
     }
   
