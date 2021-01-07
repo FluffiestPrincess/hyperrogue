@@ -300,43 +300,43 @@ EX namespace inv {
     gainOrbs(itHyperstone, itOrbMirror);
     gainOrbs(itDiamond, itOrbFlash);
     gainOrbs(itGold, itOrbLife);
-    gainOrbs(itSpice, itOrbShield);
+    gainOrbs(itStatue, itOrbShield);
     gainOrbs(itRuby, itOrbLightning);
     gainOrbs(itElixir, itOrbSpeed);
     gainOrbs(itBone, itGreenStone);
     gainOrbs(itHell, itOrbYendor);
-    gainOrbs(itStatue, itOrbTeleport);
+    gainOrbs(itApple, itOrbTeleport);
     gainOrbs(itFeather, itOrbSafety);
-    gainOrbs(itSapphire, itOrbMorph);
+    gainOrbs(itBrownian, itOrbMorph);
     gainOrbs(itFernFlower, itOrbThorns);
-    gainOrbs(itWine, itOrbAether);
+    gainOrbs(itElemental, itOrbAether);
     gainOrbs(itSilver, itOrbDigging);
     gainOrbs(itRoyalJelly, itOrbInvis);
     gainOrbs(itEmerald, itOrbPsi);
-    gainOrbs(itPower, itOrbFire);
-    gainOrbs(itHolyGrail, itOrbIllusion);
-    gainOrbs(itGrimoire, itOrbDragon);
-    gainOrbs(itPirate, itOrbTime);
-    gainOrbs(itRedGem, itOrbSpace);
+    gainOrbs(itDragon, itOrbFire);
+    gainOrbs(itPalace, itOrbIllusion);
+    gainOrbs(itBlizzard, itOrbDragon);
+    gainOrbs(itHolyGrail, itOrbTime);
+    gainOrbs(itSwitch, itOrbSpace);
     gainOrbs(itBombEgg, itOrbFriend);
-    gainOrbs(itCoast, itOrbEmpathy);
+    gainOrbs(itPower, itOrbEmpathy);
     gainOrbs(itWhirlpool, itOrbWater);
-    gainOrbs(itPalace, itOrbDiscord);
+    gainOrbs(itPirate, itOrbDiscord);
     gainOrbs(itFjord, itOrbFish);
     gainOrbs(itSavedPrincess, itOrbLove);
     gainOrbs(itIvory, itOrbMatter);
     gainOrbs(itZebra, itOrbFrog);
-    gainOrbs(itElemental, itOrbSummon);
+    gainOrbs(itRedGem, itOrbSummon);
     gainOrbs(itFulgurite, itOrbStunning);
-    gainOrbs(itMutant, itOrbLuck);
+    gainOrbs(itCoast, itOrbLuck);
     gainOrbs(itMutant2, itOrbFreedom);
     gainOrbs(itLotus, itOrbUndeath);
     gainOrbs(itWindstone, itOrbAir);
     gainOrbs(itRose, itOrbBeauty);
     gainOrbs(itCoral, itOrb37);
     gainOrbs(itBabyTortoise, itOrbShell);
-    gainOrbs(itApple, itOrbEnergy);
-    gainOrbs(itDragon, itOrbDomination);
+    gainOrbs(itGrimoire, itOrbEnergy);
+    gainOrbs(itSpice, itOrbDomination);
     gainOrbs(itKraken, itOrbSword);
     gainOrbs(itBarrow, itOrbSword2);
     gainOrbs(itTrollEgg, itOrbStone);
@@ -354,23 +354,23 @@ EX namespace inv {
     gainRandomOrbs(demonicOrbs, itHell, 20, 100);
     gainOrbs(itLavaLily, itOrbLava);
     gainOrbs(itHunting, itOrbSide3);
-    gainOrbs(itBlizzard, itOrbWinter);
+    gainOrbs(itSapphire, itOrbWinter);
     gainOrbs(itTerra, itOrbSide1);
     
     for(auto& it: lateextraorbs) gainLate(it.treasure, it.orb);
     
     gainOrbs(itGlowCrystal, itOrbSide2);
-    gainOrbs(itSwitch, itOrbPhasing);
+    gainOrbs(itMutant, itOrbPhasing);
     gainOrbs(itMagnet, itOrbMagnetism);
     gainOrbs(itRuins, itOrbSlaying);
     
     gainOrbs(itWest, itOrbGravity);
     gainOrbs(itVarTreasure, itOrbIntensity);
-    gainOrbs(itBrownian, itOrbChoice);
+    gainOrbs(itEclectic, itOrbChoice);
     
     gainOrbs(itFrog, itOrbImpact);
     gainOrbs(itWet, itOrbPlague);
-    gainOrbs(itEclectic, itOrbChaos);
+    gainOrbs(itWine, itOrbDisintegration);
 
 #if CAP_DAILY    
     daily::gifts();
