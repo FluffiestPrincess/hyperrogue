@@ -163,7 +163,7 @@ EX void reduceOrbPowers() {
   reduceOrbPower(itOrbImpact, 120);
   reduceOrbPower(itOrbChaos, 120);
   reduceOrbPower(itOrbPlague, 120);
-//  reduceOrbPower(itOrbDisintegration, 333);
+  reduceOrbPower(itOrbDisintegration, 333);
 
   reduceOrbPower(itOrbSide1, 120);
   reduceOrbPower(itOrbSide2, 120);
